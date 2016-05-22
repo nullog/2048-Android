@@ -46,7 +46,7 @@ class InputListener implements View.OnTouchListener {
             case MotionEvent.ACTION_MOVE:
                 x = event.getX();
                 y = event.getY();
-                if (mView.game.isActive()) {
+                if (mView.game.isActive() && gridSwiped()) {
                     float dx = x - previousX;
                     if (Math.abs(lastDx + dx) < Math.abs(lastDx) + Math.abs(dx) && Math.abs(dx) > RESET_STARTING
                             && Math.abs(x - startingX) > SWIPE_MIN_DISTANCE) {
@@ -149,6 +149,11 @@ class InputListener implements View.OnTouchListener {
                 && inRange(sy, y, sy + mView.iconSize);
     }
 
+    private boolean gridSwiped(){
+        return inRange(mView.startingX, x, mView.endingX) &&
+                inRange(mView.startingY, y, mView.endingY);
+    }
+
     private boolean inRange(float starting, float check, float ending) {
         return (starting <= check && check <= ending);
     }
@@ -156,4 +161,5 @@ class InputListener implements View.OnTouchListener {
     private boolean isTap(int factor) {
         return pathMoved() <= mView.iconSize * factor;
     }
+
 }

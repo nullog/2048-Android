@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {

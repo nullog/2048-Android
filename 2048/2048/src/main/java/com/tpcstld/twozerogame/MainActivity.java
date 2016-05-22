@@ -3,11 +3,10 @@ package com.tpcstld.twozerogame;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.Window;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String WIDTH = "width";
     private static final String HEIGHT = "height";
@@ -96,7 +95,8 @@ public class MainActivity extends ActionBarActivity {
         editor.putBoolean(CAN_UNDO, view.game.canUndo);
         editor.putInt(GAME_STATE, view.game.gameState);
         editor.putInt(UNDO_GAME_STATE, view.game.lastGameState);
-        editor.commit();
+        //editor.commit();
+        editor.apply();
     }
 
     protected void onResume() {
@@ -116,14 +116,18 @@ public class MainActivity extends ActionBarActivity {
                     view.game.grid.field[xx][yy] = new Tile(xx, yy, value);
                 } else if (value == 0) {
                     view.game.grid.field[xx][yy] = null;
-                }
+                }/* else {
+                    // do nothing
+                }*/
 
                 int undoValue = settings.getInt(UNDO_GRID + xx + " " + yy, -1);
                 if (undoValue > 0) {
                     view.game.grid.undoField[xx][yy] = new Tile(xx, yy, undoValue);
                 } else if (value == 0) {
                     view.game.grid.undoField[xx][yy] = null;
-                }
+                } /*else {
+                    // do nothing
+                }*/
             }
         }
 

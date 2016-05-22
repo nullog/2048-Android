@@ -1,6 +1,5 @@
 package com.tpcstld.twozerogame;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -9,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -70,8 +71,8 @@ public class MainView extends View {
     private int titleWidthHighScore;
     private int titleWidthScore;
 
-    public MainView(Context context) {
-        super(context);
+    public MainView(Context context, AttributeSet attributeSet, int defStyleAttr) {
+        super(context, attributeSet, defStyleAttr);
 
         //Loading resources
         game = new MainGame(context, this);
@@ -80,7 +81,7 @@ public class MainView extends View {
             backgroundRectangle = getDrawable(R.drawable.background_rectangle);
             lightUpRectangle = getDrawable(R.drawable.light_up_rectangle);
             fadeRectangle = getDrawable(R.drawable.fade_rectangle);
-            this.setBackgroundColor(getResources().getColor(R.color.background));
+            this.setBackgroundColor(ContextCompat.getColor(context, R.color.background));
             Typeface font = Typeface.createFromAsset(getResources().getAssets(), "ClearSans-Bold.ttf");
             paint.setTypeface(font);
             paint.setAntiAlias(true);
@@ -91,7 +92,15 @@ public class MainView extends View {
         game.newGame();
     }
 
-    private static int log2(int n) {
+    public MainView(Context context, AttributeSet attributeSet){
+        this(context, attributeSet, 0);
+    }
+
+    public MainView(Context context){
+        this(context, null);
+    }
+
+    private static int log2(int n) { // 0 - 30
         if (n <= 0) throw new IllegalArgumentException();
         return 31 - Integer.numberOfLeadingZeros(n);
     }
@@ -138,9 +147,12 @@ public class MainView extends View {
         createOverlays();
     }
 
-    @SuppressWarnings("deprecation")
     private Drawable getDrawable(int resId) {
-        return getResources().getDrawable(resId);
+        return ContextCompat.getDrawable(getContext(), resId);
+    }
+
+    private int getColor(int resId){
+        return ContextCompat.getColor(getContext(), resId);
     }
 
     private void drawDrawable(Canvas canvas, Drawable draw, int startingX, int startingY, int endingX, int endingY) {
@@ -151,9 +163,9 @@ public class MainView extends View {
     private void drawCellText(Canvas canvas, int value) {
         int textShiftY = centerText();
         if (value >= 8) {
-            paint.setColor(getResources().getColor(R.color.text_white));
+            paint.setColor(getColor(R.color.text_white));
         } else {
-            paint.setColor(getResources().getColor(R.color.text_black));
+            paint.setColor(getColor(R.color.text_black));
         }
         canvas.drawText("" + value, cellSize / 2, cellSize / 2 - textShiftY, paint);
     }
@@ -182,21 +194,20 @@ public class MainView extends View {
         backgroundRectangle.setBounds(sXHighScore, sYAll, eXHighScore, eYAll);
         backgroundRectangle.draw(canvas);
         paint.setTextSize(titleTextSize);
-        paint.setColor(getResources().getColor(R.color.text_brown));
+        paint.setColor(getColor(R.color.text_brown));
         canvas.drawText(getResources().getString(R.string.high_score), sXHighScore + textMiddleHighScore, titleStartYAll, paint);
         paint.setTextSize(bodyTextSize);
-        paint.setColor(getResources().getColor(R.color.text_white));
+        paint.setColor(getColor(R.color.text_white));
         canvas.drawText(String.valueOf(game.highScore), sXHighScore + textMiddleHighScore, bodyStartYAll, paint);
-
 
         //Outputting scores box
         backgroundRectangle.setBounds(sXScore, sYAll, eXScore, eYAll);
         backgroundRectangle.draw(canvas);
         paint.setTextSize(titleTextSize);
-        paint.setColor(getResources().getColor(R.color.text_brown));
+        paint.setColor(getColor(R.color.text_brown));
         canvas.drawText(getResources().getString(R.string.score), sXScore + textMiddleScore, titleStartYAll, paint);
         paint.setTextSize(bodyTextSize);
-        paint.setColor(getResources().getColor(R.color.text_white));
+        paint.setColor(getColor(R.color.text_white));
         canvas.drawText(String.valueOf(game.score), sXScore + textMiddleScore, bodyStartYAll, paint);
     }
 
@@ -248,7 +259,7 @@ public class MainView extends View {
 
     private void drawHeader(Canvas canvas) {
         paint.setTextSize(headerTextSize);
-        paint.setColor(getResources().getColor(R.color.text_black));
+        paint.setColor(getColor(R.color.text_black));
         paint.setTextAlign(Paint.Align.LEFT);
         int textShiftY = centerText() * 2;
         int headerStartY = sYAll - textShiftY;

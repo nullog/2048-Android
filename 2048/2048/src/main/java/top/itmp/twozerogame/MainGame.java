@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package top.itmp.twozerogame;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -48,7 +48,7 @@ public class MainGame {
     public MainGame(Context context, MainView view) {
         mContext = context;
         mView = view;
-        endingMaxValue = (int) Math.pow(2, view.numCellTypes - 1);
+        endingMaxValue = (int) Math.pow(2, view.numCellTypes - 1); //2048
     }
 
     public void newGame() {

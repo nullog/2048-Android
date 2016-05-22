@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package top.itmp.twozerogame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

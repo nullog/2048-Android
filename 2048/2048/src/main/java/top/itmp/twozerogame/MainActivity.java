@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package top.itmp.twozerogame;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package top.itmp.twozerogame;
 
 import java.util.ArrayList;
 
@@ -84,7 +84,7 @@ public class Grid {
 
     public void saveTiles() {
         for (int xx = 0; xx < bufferField.length; xx++) {
-            for (int yy = 0; yy < bufferField[0].length; yy++) {
+            for (int yy = 0; yy < bufferField[xx].length; yy++) {
                 if (bufferField[xx][yy] == null) {
                     undoField[xx][yy] = null;
                 } else {

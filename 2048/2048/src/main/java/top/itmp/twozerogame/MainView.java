@@ -548,7 +548,7 @@ public class MainView extends View {
 
         paint.setTextSize(cellSize);
         cellTextSize = textSize;
-        titleTextSize = textSize / 3;
+        titleTextSize = textSize / 2;
         bodyTextSize = (int) (textSize / 1.5);
         headerTextSize = textSize * 2;
         textPaddingSize = (int) (textSize / 3);

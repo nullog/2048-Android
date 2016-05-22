@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +28,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view = new MainView(this);
+
+        enterFullScreen(view);
+
+        AlphaAnimation aa = new AlphaAnimation(0.0f, 1.0f);
+        aa.setDuration(1000);
+        view.startAnimation(aa);
+
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.ABSOLUTE, 0, Animation.ABSOLUTE, 0,
+                Animation.ABSOLUTE, 512f, Animation.ABSOLUTE, 0);
+        translateAnimation.setDuration(2500);
+        view.startAnimation(translateAnimation);
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, 512f, 512f);
+        scaleAnimation.setDuration(2500);
+        view.startAnimation(scaleAnimation);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         view.hasSaveState = settings.getBoolean("save_state", false);
@@ -102,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        enterFullScreen(view);
         load();
     }
 
@@ -138,5 +159,14 @@ public class MainActivity extends AppCompatActivity {
         view.game.canUndo = settings.getBoolean(CAN_UNDO, view.game.canUndo);
         view.game.gameState = settings.getInt(GAME_STATE, view.game.gameState);
         view.game.lastGameState = settings.getInt(UNDO_GAME_STATE, view.game.lastGameState);
+    }
+
+    private void enterFullScreen(View view){
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 }

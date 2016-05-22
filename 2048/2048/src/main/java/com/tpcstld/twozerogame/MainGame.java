@@ -98,7 +98,8 @@ public class MainGame {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = settings.edit();
         editor.putLong(HIGH_SCORE, highScore);
-        editor.commit();
+        //editor.commit();
+        editor.apply();
     }
 
     private long getHighScore() {

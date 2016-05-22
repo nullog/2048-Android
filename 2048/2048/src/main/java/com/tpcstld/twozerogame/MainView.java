@@ -280,7 +280,6 @@ public class MainView extends View {
 
     //Renders the set of 16 background squares.
     private void drawBackgroundGrid(Canvas canvas) {
-        Resources resources = getResources();
         Drawable backgroundCell = getDrawable(R.drawable.cell_rectangle);
         // Outputting the game grid
         for (int xx = 0; xx < game.numSquaresX; xx++) {
@@ -400,7 +399,7 @@ public class MainView extends View {
     private void drawEndlessText(Canvas canvas) {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(bodyTextSize);
-        paint.setColor(getResources().getColor(R.color.text_black));
+        paint.setColor(getColor(R.color.text_black));
         canvas.drawText(getResources().getString(R.string.endless), startingX, sYIcons - centerText() * 2, paint);
     }
 
@@ -413,7 +412,7 @@ public class MainView extends View {
             lightUpRectangle.setAlpha(127);
             drawDrawable(canvas, lightUpRectangle, 0, 0, width, length);
             lightUpRectangle.setAlpha(255);
-            paint.setColor(getResources().getColor(R.color.text_white));
+            paint.setColor(getColor(R.color.text_white));
             paint.setAlpha(255);
             paint.setTextSize(gameOverTextSize);
             paint.setTextAlign(Paint.Align.CENTER);
@@ -427,7 +426,7 @@ public class MainView extends View {
             fadeRectangle.setAlpha(127);
             drawDrawable(canvas, fadeRectangle, 0, 0, width, length);
             fadeRectangle.setAlpha(255);
-            paint.setColor(getResources().getColor(R.color.text_black));
+            paint.setColor(getColor(R.color.text_black));
             paint.setAlpha(255);
             paint.setTextSize(gameOverTextSize);
             paint.setTextAlign(Paint.Align.CENTER);

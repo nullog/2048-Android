@@ -81,7 +81,7 @@ public class MainView extends View {
             backgroundRectangle = getDrawable(R.drawable.background_rectangle);
             lightUpRectangle = getDrawable(R.drawable.light_up_rectangle);
             fadeRectangle = getDrawable(R.drawable.fade_rectangle);
-            this.setBackgroundColor(ContextCompat.getColor(context, R.color.background));
+            this.setBackgroundColor(getColor(R.color.background));
             Typeface font = Typeface.createFromAsset(getResources().getAssets(), "ClearSans-Bold.ttf");
             paint.setTypeface(font);
             paint.setAntiAlias(true);

@@ -12,6 +12,6 @@
     <!-- Confirmation dialog-->
     <string name="reset">重置</string>
     <string name="continue_game">取消</string>
-    <string name="reset_dialog_title">重新游戏?</string>
+    <string name="reset_dialog_title">重新游戏</string>
     <string name="reset_dialog_message">你确定真的要重新开始游戏?</string>
 </resources>
